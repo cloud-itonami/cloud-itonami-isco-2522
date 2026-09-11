@@ -57,7 +57,7 @@
      and `:rotate-credentials` (both always human-approved regardless
      of confidence).
 
-  Usage: `clojure -M:render-html [out-file]`
+  Usage: `kbb -M:render-html [out-file]`
   (default `docs/samples/operator-console.html`)."
   (:require [jp-go-dds.skin]
             [kotoba.lang.text :as str]
@@ -211,7 +211,7 @@
      "<main>\n"
      "  <section class=\"card\">\n"
      "    <h2>Registered clients</h2>\n"
-     "    <p class=\"muted\">Demo snapshot — build-time-generated from <code>sysadmin.store</code> via <code>sysadmin.render-html</code> (<code>clojure -M:render-html</code>), regenerated nightly.</p>\n"
+     "    <p class=\"muted\">Demo snapshot — build-time-generated from <code>sysadmin.store</code> via <code>sysadmin.render-html</code> (<code>kbb -M:render-html</code>), regenerated nightly.</p>\n"
      "    <table>\n"
      "      <thead><tr><th>Client</th><th>Name</th><th>Change freezes</th><th>Committed records</th><th>Requests this run</th></tr></thead>\n"
      "      <tbody>\n"
