@@ -1,0 +1,33 @@
+;; What this vertical's robot physically does, declared for
+;; kotoba.robotics.process (kotoba-lang/robotics). `kbb -M:physics` runs it.
+;;
+;; ISCO 2522, systems administrators. The README calls this pure-cognitive work with no robotics
+;; gate; blueprint.edn nevertheless declares :itonami.blueprint/robotics true.
+;; The physical work declared here is the handling the occupation itself
+;; entails (ASSUMPTION, not stated in the README): lifting a server into its rack slot, and carrying replacement servers on a cart from the loading bay to the server room.
+;; Replace with the README premise once one is written.
+;;
+;; Every number without a cited source is marked `estimate` in its :basis.
+;; Replacing an estimate with a sourced value is this bot's growth work.
+{:physics/schema "itonami.physical-ai.spec.v1"
+ :repo "cloud-itonami/cloud-itonami-isco-2522"
+ :cases
+ [{:id :server-into-rack-slot
+   :kind :manipulator
+   :procedure "arm lifts a rack server from the server lift cart up to its rails at mid-rack height"
+   :params {:l1-m 0.60 :l2-m 0.55 :m1-kg 8.0 :m2-kg 6.0
+            :from [0.65 -0.20] :to [0.70 0.45] :duration-s 3.0 :steps 500}
+   :sweep {:param :payload-kg :values [10.0 16.0 22.0 28.0 35.0]}
+   :quantity :peak-tau1-nm
+   :limit {:max 350.0 :basis "estimate: continuous shoulder torque of a 20 kg-payload class industrial arm"}
+   :boundary {:lo 1.0 :hi 80.0}}
+  {:id :server-cart-to-room
+   :kind :transport
+   :procedure "AMR tows a cart of replacement servers from the loading bay to the server room"
+   :params {:mass-kg 60.0 :distance-m 60.0 :v-max-mps 1.0 :a-max-mps2 0.5
+            :brake-decel-mps2 0.6 :drive-force-n 100.0 :crr 0.02
+            :cog-height-m 0.80 :support-half-length-m 0.30}
+   :sweep {:param :payload-kg :values [30.0 60.0 100.0 150.0 200.0]}
+   :quantity :cycle-time-s
+   :limit {:max 75.0 :basis "estimate: a cart leg within 75 s keeps a hardware swap inside the maintenance window"}
+   :boundary {:lo 5.0 :hi 400.0}}]}
