@@ -1,7 +1,7 @@
 (ns sysadmin.governor
   "SystemsAdministrationGovernor — the independent safety/traceability
   layer for the ISCO-08 2522 community systems-administration actor
-  (itonami actor pattern, ADR-2607011000 / CLAUDE.md Actors section).
+  (itonami actor pattern, ADR-2607011000 / AGENTS.md Actors section).
   Modeled on cloud-itonami-isco-4311's bookkeeping.governor. SysAdmin-
   specific twist: change timing is checked DETERMINISTICALLY twice —
   the change interval must be CONTAINED in an approved maintenance
